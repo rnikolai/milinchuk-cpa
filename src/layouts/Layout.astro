@@ -1,0 +1,163 @@
+---
+import Nav from '../components/Nav.astro';
+
+interface Props {
+  title?: string;
+  showSubscribe?: boolean;
+}
+
+const {
+  title = 'Milinchuk CPA Professional Corporation',
+  showSubscribe = true,
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{title}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/magnific-popup.css">
+    <link rel="stylesheet" href="/css/flaticon.css">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <style>
+      .row-no-wrap { display: flex; }
+    </style>
+
+    <div class="wrap">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="bg-wrap">
+              <div class="row-no-wrap">
+                <div class="col-md-6 d-flex align-items-center">
+                  <p class="mb-0 phone pl-md-2">
+                    <a href="tel://6478012969" class="text-nowrap"><span class="fa fa-phone mr-1"></span> (647)-801-2969</a>
+                    <a href="mailto:info@MilinchukCPA.com" class="text-nowrap"><span class="fa fa-paper-plane mr-1"></span> info@MilinchukCPA.com</a>
+                  </p>
+                </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-end">
+                  <div class="social-media d-flex">
+                    <a href="https://www.facebook.com/profile.php?id=61573989170619" class="d-flex align-items-center justify-content-center me-3">
+                      <span class="fa-brands fa-lg fa-facebook text-white"><i class="sr-only">Facebook</i></span>
+                    </a>
+                    <a href="https://x.com/MilinchukCPA" class="d-flex align-items-center justify-content-center me-3">
+                      <span class="fa-brands fa-lg fa-x-twitter text-white"><i class="sr-only">X</i></span>
+                    </a>
+                    <a href="https://t.me/+16478012969" class="d-flex align-items-center justify-content-center me-3">
+                      <span class="fa-brands fa-lg fa-telegram text-white"><span class="sr-only">Telegram</span></span>
+                    </a>
+                    <a href="https://wa.me/16478012969" class="d-flex align-items-center justify-content-center">
+                      <span class="fa-brands fa-lg fa-whatsapp text-white"><span class="sr-only">WhatsApp</span></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <Nav />
+
+    <slot />
+
+    {showSubscribe && (
+      <section class="ftco-section ftco-no-pb ftco-no-pt bg-secondary">
+        <div class="container py-5">
+          <div class="row">
+            <div class="col-md-7 d-flex align-items-center">
+              <h2 class="mb-3 mb-sm-0" style="color:black; font-size: 22px;">Sign Up for Your 1st Accounting Consultation</h2>
+            </div>
+            <div class="col-md-5 d-flex align-items-center">
+              <form action="#" class="subscribe-form">
+                <div class="form-group d-flex">
+                  <input type="text" class="form-control" placeholder="Enter email address">
+                  <input type="submit" value="Subscribe" class="submit px-3">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <footer class="footer">
+      <div class="container-fluid px-lg-5">
+        <div class="row">
+          <div class="col-md-9 pt-5">
+            <div class="row">
+              <div class="col-md-4 mb-md-0 mb-4">
+                <h2 class="footer-heading">About Us</h2>
+                <p>Committed to Accuracy, Integrity, and Your Financial Success.</p>
+                <ul class="ftco-footer-social p-0">
+                  <li class="ftco-animate">
+                    <a href="https://www.facebook.com/profile.php?id=61573989170619" data-toggle="tooltip" data-placement="top" title="Facebook">
+                      <span class="fa-brands fa-facebook"></span>
+                    </a>
+                  </li>
+                  <li class="ftco-animate">
+                    <a href="https://x.com/MilinchukCPA" class="d-flex align-items-center justify-content-center me-3">
+                      <span class="fa-brands fa-lg fa-x-twitter"><i class="sr-only">X</i></span>
+                    </a>
+                  </li>
+                  <li class="ftco-animate">
+                    <a href="https://t.me/+16478012969" class="d-flex align-items-center justify-content-center me-3">
+                      <span class="fa-brands fa-lg fa-telegram"><span class="sr-only">Telegram</span></span>
+                    </a>
+                  </li>
+                  <li class="ftco-animate">
+                    <a href="https://wa.me/16478012969" data-toggle="tooltip" class="d-flex align-items-center justify-content-center">
+                      <span class="fa-brands fa-whatsapp"><span class="sr-only">WhatsApp</span></span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-md-8">
+                <div class="row justify-content-center"></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p class="copyright">
+                  Copyright &copy;{new Date().getFullYear()} All rights reserved | Milinchuk CPA
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="ftco-loader" class="show fullscreen">
+      <svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/>
+      </svg>
+    </div>
+
+    <script is:inline src="/js/jquery.min.js"></script>
+    <script is:inline src="/js/jquery-migrate-3.0.1.min.js"></script>
+    <script is:inline src="/js/popper.min.js"></script>
+    <script is:inline src="/js/bootstrap.min.js"></script>
+    <script is:inline src="/js/jquery.easing.1.3.js"></script>
+    <script is:inline src="/js/jquery.waypoints.min.js"></script>
+    <script is:inline src="/js/jquery.stellar.min.js"></script>
+    <script is:inline src="/js/jquery.animateNumber.min.js"></script>
+    <script is:inline src="/js/owl.carousel.min.js"></script>
+    <script is:inline src="/js/jquery.magnific-popup.min.js"></script>
+    <script is:inline src="/js/scrollax.min.js"></script>
+    <script is:inline src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script is:inline src="/js/google-map.js"></script>
+    <script is:inline src="/js/main.js"></script>
+  </body>
+</html>
