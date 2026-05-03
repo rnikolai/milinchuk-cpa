@@ -21,9 +21,64 @@ import Layout from '../layouts/Layout.astro';
           <div class="row no-gutters">
             <div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
               <div class="contact-wrap w-100 p-md-5 p-4">
-                <script is:inline type="text/javascript" src="https://form.jotform.com/jsform/250907591327057"></script>
+                <h3 class="mb-4">Send Us a Message</h3>
+
+                <div id="form-success" class="alert alert-success" style="display:none;">
+                  Thank you! Your message has been sent. We'll be in touch shortly.
+                </div>
+                <div id="form-error" class="alert alert-danger" style="display:none;">
+                  Something went wrong. Please try again or email us directly at <a href="mailto:info@MilinchukCPA.com">info@MilinchukCPA.com</a>.
+                </div>
+
+                <form id="contact-form" novalidate>
+                  <div style="display:none;">
+                    <input type="text" name="_honey" tabindex="-1" autocomplete="off">
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="from_name">Full Name *</label>
+                        <input type="text" id="from_name" name="from_name" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="from_email">Email Address *</label>
+                        <input type="email" id="from_email" name="from_email" class="form-control" required>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" cols="30" rows="6" class="form-control" required></textarea>
+                  </div>
+
+                  <div class="form-group">
+                    <button type="submit" id="submit-btn" class="btn btn-primary py-3 px-5">
+                      Send Message
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
+
             <div class="col-lg-4 col-md-5 d-flex align-items-stretch">
               <div class="info-wrap bg-primary w-100 p-md-5 p-4">
                 <h3>Let's get in touch</h3>
@@ -33,7 +88,7 @@ import Layout from '../layouts/Layout.astro';
                     <span class="fa fa-map-marker"></span>
                   </div>
                   <div class="text pl-3">
-                    <p><span>Address:</span>17 Festival Drive, Toronto, ON M2R 3T9 Canada</p>
+                    <p><span>Address:</span> 17 Festival Drive, Toronto, ON M2R 3T9 Canada</p>
                   </div>
                 </div>
                 <div class="dbox w-100 d-flex align-items-center">
@@ -54,9 +109,50 @@ import Layout from '../layouts/Layout.astro';
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
     </div>
   </section>
 </Layout>
+
+<script>
+  import emailjs from '@emailjs/browser';
+
+  const SERVICE_ID  = 'YOUR_SERVICE_ID';
+  const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+  const PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+
+  emailjs.init({ publicKey: PUBLIC_KEY });
+
+  const form      = document.getElementById('contact-form') as HTMLFormElement;
+  const btn       = document.getElementById('submit-btn') as HTMLButtonElement;
+  const successEl = document.getElementById('form-success') as HTMLElement;
+  const errorEl   = document.getElementById('form-error') as HTMLElement;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // honeypot — bail silently if filled by a bot
+    const honey = form.querySelector<HTMLInputElement>('[name="_honey"]')!;
+    if (honey.value) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    successEl.style.display = 'none';
+    errorEl.style.display   = 'none';
+
+    try {
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form);
+      successEl.style.display = 'block';
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      errorEl.style.display = 'block';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Send Message';
+    }
+  });
+</script>
