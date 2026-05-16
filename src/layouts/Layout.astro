@@ -3,23 +3,61 @@ import Nav from '../components/Nav.astro';
 
 interface Props {
   title?: string;
+  description?: string;
   showSubscribe?: boolean;
 }
 
 const {
   title = 'Milinchuk CPA Professional Corporation',
+  description = 'Milinchuk CPA Professional Corporation offers professional accounting, tax preparation, and financial advisory services in Toronto, Ontario.',
   showSubscribe = true,
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
+const canonicalURL = Astro.url.href;
+const ogImage = new URL(`${base}images/bg_1.jpg`, Astro.url).href;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'AccountingService',
+  name: 'Milinchuk CPA Professional Corporation',
+  url: canonicalURL,
+  telephone: '+16478012969',
+  email: 'info@milinchukcpa.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '17 Festival Drive',
+    addressLocality: 'Toronto',
+    addressRegion: 'ON',
+    postalCode: 'M2R 3T9',
+    addressCountry: 'CA',
+  },
+};
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>{title}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <link rel="canonical" href={canonicalURL}>
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content={canonicalURL}>
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:image" content={ogImage}>
+    <meta property="og:locale" content="en_CA">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
+    <meta name="twitter:image" content={ogImage}>
+
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href={`${base}css/animate.css`}>
